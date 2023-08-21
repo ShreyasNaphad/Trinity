@@ -1,0 +1,36 @@
+class User:
+    def __init__(self, username, role):
+        self.username = username
+        self.role = role
+
+class Content:
+    def __init__(self, content_name, allowed_roles):
+        self.content_name = content_name
+        self.allowed_roles = allowed_roles
+
+# Creating list of users
+users = [
+    User("user1", "admin"),
+    User("user2", "editor"),
+    User("user3", "viewer")
+]
+
+# Creating list of content
+contents = [
+    Content("Admin Content", ["admin"]),
+    Content("Editor Content", ["admin", "editor"]),
+    Content("Viewer Content", ["admin", "editor", "viewer"])
+]
+
+# Checking Access Control
+def check_access(user, content):
+    if user.role in content.allowed_roles:
+        return f"{user.username} has access to {content.content_name}."
+    else:
+        return f"{user.username} does not have access to {content.content_name}."
+
+
+for user in users:
+    print("\n")
+    for content in contents:
+        print(check_access(user, content))
